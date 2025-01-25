@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>შემაჯამებელი წერა 8</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script>
+        /// Function to get query string parameters
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Display the student ID and store it in localStorage
+window.onload = function () {
+    const studentId = getQueryParam('student_id');
+    const firstName = getQueryParam('first_name');
+    const lastName = getQueryParam('last_name');
+
+    // Display the student ID
+    if (studentId) {
+        document.getElementById('student-id').textContent = studentId;
+        localStorage.setItem("studentId", studentId); // Store in localStorage
+    } else {
+        document.getElementById('student-id').textContent = "Student ID not found!";
+    }
+
+    // Display the first name
+    if (firstName) {
+        document.getElementById('first_name').textContent = firstName;
+        localStorage.setItem("firstName", firstName); // Store in localStorage
+    } else {
+        document.getElementById('first_name').textContent = "First name not found!";
+    }
+
+    // Display the last name
+    if (lastName) {
+        document.getElementById('last_name').textContent = lastName;
+        localStorage.setItem("lastName", lastName); // Store in localStorage
+    } else {
+        document.getElementById('last_name').textContent = "Last name not found!";
+    }
+};
+
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"
+    
+	<style>
+
+	</style>
+
+</head>
+
+<body>
+	<header>
+		<h1 id="header">შემაჯამებელი წერა 8 </h1>
+        <p>მონაწილის ID: <span id="student-id"></span></p>
+        <p style="display: none;" > სახელი: <span id="first_name"></span></p>
+        <p style="display: none;"> გვარი: <span id="last_name"></span></p>
+         <p>სახელი და გვარი: {{ first_name }} {{ last_name }}</p>
+	</header>
+	<div id="timer">დარჩენილია 45 წუთი და 00 წამი</div> <!-- Timer display -->
+	<main>
+		<form id="quizForm">
+			<!-- Question 1 -->
+			<div class="question" id="question1"> <strong> (1) 1. </strong> <br> 
+                \(2\frac{3}{4}-0,2=\)
+				<div> </div>
+				<div>
+					<input type="radio" name="q1" value="ა" id="q1a"><label for="q1a"> ა) \( \frac{51}{20}\)
+					</label><br>
+					<input type="radio" name="q1" value="ბ" id="q1b"><label for="q1b"> ბ) \( 2\frac{9}{20}\)
+					</label><br>
+					<input type="radio" name="q1" value="გ" id="q1c"><label for="q1c"> გ) \( 1\frac{5}{20}\)
+					</label><br>
+					<input type="radio" name="q1" value="დ" id="q1d"><label for="q1d"> დ) \( 2\frac{5}{11}\)
+					</label>
+				</div>
+			</div>
+
+			<!-- Question 2 -->
+			<div class="question" id="question2">
+				<strong> (1) 2. </strong> <br>
+				იპოვეთ \(A=\{3; -1; 2; 5; 6,1; 9,2; -2\}\) და \(B=\{-1; 8; -3,4; 1,7; 5; 9\}\) სიმრავლეთა თანაკვეთაში ელემენტთა რაოდენობა. 
+				<div> </div>
+				<div>
+					<input type="radio" name="q2" value="ა" id="q2a"><label for="q2a"> ა) \(1\) </label><br>
+					<input type="radio" name="q2" value="ბ" id="q2b"><label for="q2b"> ბ) \(2\) </label><br>
+					<input type="radio" name="q2" value="გ" id="q2c"><label for="q2c"> გ) \(3\) </label><br>
+					<input type="radio" name="q2" value="დ" id="q2d"><label for="q2d"> დ) \(4\) </label>
+				</div>
+			</div>
+
+			<!-- Question 3 -->
+			<div class="question" id="question3">
+				<strong> (1) 3. </strong> <br>
+				კინოს 6 ბილეთსა და თეატრის 1 ბილეთში გადაიხდით 2-ჯერ უფრო ძვირს, ვიდრე თეატრის ორ ბილეთში. <br> 
+                რამდენი პროცენტით ძვირია კინოს ერთი ბილეთი თეატრის ერთ ბილეთზე?
+				<div> </div>
+				<div>
+					<input type="radio" name="q3" value="ა" id="q3a"><label for="q3a"> ა) 20% </label><br>
+					<input type="radio" name="q3" value="ბ" id="q3b"><label for="q3b">ბ) 50% </label><br>
+					<input type="radio" name="q3" value="გ" id="q3c"><label for="q3c">გ) 500% </label><br>
+					<input type="radio" name="q3" value="დ" id="q3d"><label for="q3d">დ) 400% </label>
+				</div>
+			</div>
+
+			<!-- Question 4 -->
+			<div class="question" id="question4">
+				<strong> (1) 4. </strong> <br>
+				იპოვეთ \(-2x-3>x+\frac{2x-1}{3}\) უტოლობის უდიდესი მთელი ამონახსნი. <br>
+								
+				<div> </div>
+				<div>
+					<input type="radio" name="q4" value="ა" id="q4a"><label for="q4a">ა) \( 2 \) </label><br>
+					<input type="radio" name="q4" value="ბ" id="q4b"><label for="q4b">ბ) \( 0 \) </label><br>
+					<input type="radio" name="q4" value="გ" id="q4c"><label for="q4c">გ) \( 1 \)  </label><br>
+					<input type="radio" name="q4" value="დ" id="q4d"><label for="q4d">დ) \( -1 \) </label>
+				</div>
+			</div>
+
+			<!-- Question 5 -->
+			<div class="question" id="question5">
+				<strong> (1) 5. </strong> <br>
+				 სამკუთხედის გვერდები ისე შეეფარდება ერთმანეთს, როგორც 6 : 7 : 11. 
+                იპოვეთ მისი მსგავსი სამკუთხედის პერიმეტრი, თუ ამ უკანასკნელის უმცირესი გვერდის სიგრძეა 18 სმ.  <br> 
+				<div> </div>
+				<div>
+					<input type="radio" name="q5" value="ა" id="q5a"><label for="q5a">ა) \( 72\) სმ </label><br>
+					<input type="radio" name="q5" value="ბ" id="q5b"><label for="q5b">ბ) \( 84\) სმ</label><br>
+					<input type="radio" name="q5" value="გ" id="q5c"><label for="q5c">გ) \( 64\) სმ </label><br>
+					<input type="radio" name="q5" value="დ" id="q5d"><label for="q5d">დ) \( 78 \) სმ</label>
+				</div>
+			</div>
+
+			<!-- Question 6 -->
+			<div class="question" id="question6">
+				<strong> (1) 6. </strong> <br>
+				გამოთვალეთ შენობის ფართობი 1 : 20 000 მასშტაბის გეგმაზე, თუ შენობის ფართობია 42 000 მ\(^2\).
+				<div> </div>
+				<div>
+					<input type="radio" name="q6" value="ა" id="q6a"><label for="q6a">ა) 21 სმ\(^2\)  </label><br>
+					<input type="radio" name="q6" value="ბ" id="q6b"><label for="q6b">ბ) 10.5 სმ\(^2\)  </label><br>
+					<input type="radio" name="q6" value="გ" id="q6c"><label for="q6c">გ) 105 სმ\(^2\)  </label><br>
+					<input type="radio" name="q6" value="დ" id="q6d"><label for="q6d">დ) 210 სმ\(^2\) </label>
+				</div>
+			</div>
+
+			<!-- Question 7 -->
+			<div class="question" id="question7">
+				<strong> (1) 7. </strong> <br>
+				მოცემულია \(x_n\) მიმდევრობა, რომლის ზოგადი სახეა \(x_n=n^2-17n\). ქვემოთ ჩამოთვლილთაგან, რომელი რიცხვი არ წარმოადგენს ამ მიმდევრობის წევრს? 
+				<div> </div>
+				<div>
+					<input type="radio" name="q7" value="ა" id="q7a"><label for="q7a">ა) \(-70\) </label><br>
+					<input type="radio" name="q7" value="ბ" id="q7b"><label for="q7b">ბ) \(-52\)</label><br>
+					<input type="radio" name="q7" value="გ" id="q7c"><label for="q7c">გ) \(-64\)</label><br>
+					<input type="radio" name="q7" value="დ" id="q7d"><label for="q7d">დ) \(-66\)</label>
+				</div>
+			</div>
+
+			<!-- Question 8 -->
+			<div class="question" id="question8">
+				<strong> (1) 8. </strong> <br>
+				იპოვეთ \(a\) პარამეტრის ყველა მნიშვნელობა, რომლისთვისაც განტოლებას \((a^2-4)x=a-2\) გააჩნია ამონახსნთა
+                უსასრულო რაოდენობა. 
+				<div> </div>
+				<div>
+					<input type="radio" name="q8" value="ა" id="q8a"><label for="q8a">ა) \( a=2 \)</label><br>
+					<input type="radio" name="q8" value="ბ" id="q8b"><label for="q8b">ბ) \( a=-2 \)</label><br>
+					<input type="radio" name="q8" value="გ" id="q8c"><label for="q8c">გ) \( a=\{-2; 2\}\)</label><br>
+					<input type="radio" name="q8" value="დ" id="q8d"><label for="q8d">დ) მსგავსი \(a\) არ არსებობს. </label>
+				</div>
+			</div>
+
+			<!-- Question 9 -->
+			<div class="question" id="question9">
+				<strong> (1) 9. </strong> <br>
+				კვადრატის პერიმეტრი ტოლია წესიერი ექვსკუთხედის პერიმეტრის. რას უდრის ექვსკუთხედის ფართობის შეფარდება კვადრატის ფართობთან?   
+				<div>
+					<input type="radio" name="q9" value="ა" id="q9a"><label for="q9a">ა) \( \frac{2}{\sqrt{3}}\) </label><br>
+					<input type="radio" name="q9" value="ბ" id="q9b"><label for="q9b">ბ) \( \frac{3}{\sqrt{2}} \) </label><br>
+					<input type="radio" name="q9" value="გ" id="q9c"><label for="q9c">გ) \( \sqrt{3} \) </label><br>
+					<input type="radio" name="q9" value="დ" id="q9d"><label for="q9d">დ) \(\sqrt{2}\) </label>
+				</div>
+			</div>
+
+			<!-- Question 10 -->
+			<div class="question" id="question10">
+				<strong> (1) 10. </strong> <br>
+				დაფაზე ერთ სტრიქონად დაწერილი 7 რიცხვის  საშუალო არითმეტიკული 13-ის ტოლია. ამ რიცხვითი 
+                მონაცემებიდან პირველი ოთხის საშუალო არითმეტიკულია 11, ხოლო ბოლო ოთხის 16. იპოვეთ მეოთხე რიცხვი.
+				<div> </div>
+				<div>
+					<input type="radio" name="q10" value="ა" id="q10a"><label for="q10a">ა) \( 20 \) </label><br>
+					<input type="radio" name="q10" value="ბ" id="q10b"><label for="q10b">ბ) \( 19\)</label><br>
+					<input type="radio" name="q10" value="გ" id="q10c"><label for="q10c">გ) \( 18\)</label><br>
+					<input type="radio" name="q10" value="დ" id="q10d"><label for="q10d">დ) \( 17 \)</label>
+				</div>
+			</div>
+
+			<!-- Question 11 -->
+			<div class="question" id="question11"> 
+				
+				<strong> (1) 11. </strong> <br>
+				რისი ტოლია კუთხე  \( \vec{a}\) და \( \vec{b}\) არანულოვან ვექტორებს შორის, თუ 
+				\(|\vec{a}+\vec{b}|=|\vec{a}-\vec{b}|\)
+				
+				<div id="question11_options"> 
+					<input type="radio" name="q11" value="ა" id="q11a"><label for="q11a">ა) \( 30^\circ \)</label> <br>  
+					<input type="radio" name="q11" value="ბ" id="q11b"><label for="q11b">ბ) \( 60^\circ \)</label><br>
+					<input type="radio" name="q11" value="გ" id="q11c"><label for="q11c">გ) \( 90^\circ \)</label><br>
+					<input type="radio" name="q11" value="დ" id="q11d"><label for="q11d">დ) \( 120^\circ \)</label> 
+				</div>
+			</div>
+
+			<!-- Question 12 -->
+			<div class="question" id="question12">
+				<strong> (1) 12. </strong> <br> 
+				ამოხსენით განტოლება: \(4+7+10+...+(x-2)=209\)
+				<div>
+					<input type="radio" name="q12" value="ა" id="q12a"><label for="q12a">ა) \(x=34  \)</label><br>
+					<input type="radio" name="q12" value="ბ" id="q12b"><label for="q12b">ბ) \( x=36 \)</label><br>
+					<input type="radio" name="q12" value="გ" id="q12c"><label for="q12c">გ) \( x=38 \)</label><br>
+					<input type="radio" name="q12" value="დ" id="q12d"><label for="q12d">დ) \( x=40\)</label>
+				</div>
+			</div>
+			<!-- Question 13 -->
+			<div class="question" id="question13">
+				<strong> (1) 13. </strong> <br>
+				იპოვეთ \( (x^2-9)(\log_{2}(-3x-2))=0\) განტოლების ყველა ამონახსნის ჯამი
+					<div>
+						<input type="radio" name="q13" value="ა" id="q13a"><label for="q13a">ა) \(  -3 \)</label><br>
+						<input type="radio" name="q13" value="ბ" id="q13b"><label for="q13b">ბ) \( 4 \)</label><br>
+						<input type="radio" name="q13" value="გ" id="q13c"><label for="q13c">გ) \(  -\frac{2}{3} \)</label><br>
+						<input type="radio" name="q13" value="დ" id="q13d"><label for="q13d">დ) \( -4 \)</label>
+					</div>
+			</div>
+			<!-- Question 14 -->
+			<div class="question" id="question14">
+				<strong> (1) 14. </strong> <br>
+				თუ \( \alpha=arcsin(\frac{1}{3}) +\frac{\pi}{6}\), მაშინ
+				<div>
+                    <input type="radio" name="q14" value="ა" id="q14a"><label for="q14a">ა) \( \alpha > \frac{\pi}{2} \) </label><br>
+					<input type="radio" name="q14" value="ბ" id="q14b"><label for="q14b">ბ) \( \frac{\pi}{3}<\alpha<\frac{\pi}{2}\) </label><br>
+                    <input type="radio" name="q14" value="გ" id="q14c"><label for="q14c">გ) \( \frac{5\pi}{6}<\alpha<\frac{3\pi}{2}\) </label><br>
+					<input type="radio" name="q14" value="დ" id="q14d"><label for="q14d">დ)\( \frac{\pi}{6}<\alpha<\frac{\pi}{3}\) </label>
+				</div>
+			</div>
+
+			<!-- Question 15 -->
+			<div class="question" id="question15">
+				<strong> (1) 15. </strong> <br>
+                იპოვეთ \(sin(x)=cos(x)\) განტოლების ამონახსნი \(x\in[2\pi;\frac{5\pi}{2}]\) შუალედზე. 
+				<div> </div>
+				<div>
+					<input type="radio" name="q15" value="ა" id="q15a"><label for="q15a"> ა) \( \frac{9\pi}{4}\) </label><br>
+					<input type="radio" name="q15" value="ბ" id="q15b"><label for="q15b"> ბ) \( \frac{11\pi}{3} \) </label><br>
+					<input type="radio" name="q15" value="გ" id="q15c"><label for="q15c"> გ) \( \frac{7\pi}{3} \) </label><br>
+					<input type="radio" name="q15" value="დ" id="q15d"><label for="q15d"> დ) \( \frac{10\pi}{4} \) </label>
+				
+				</div>
+			</div>
+			</div>
+            <button id="prev" style="display:none;">წინა</button>
+            <button id="next" >შემდეგი</button> <br>
+			<button type="button" id="submit-button" >შემოწმება</button>
+		</form>
+    <span id="nav_quest">კითხვაზე გადასვლა</span>
+<div  id="footer-navigation" class="footer-navigation">
+    
+</div>
+		<div id="result-section" style="display: none;">
+    <div id="result"></div>
+    <div id="result-table"></div>
+</div>
+		</div>
+	</main>
+	<footer>
+
+	</footer>
+    
+	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+
+
+</body>
+
+</html>

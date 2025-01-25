@@ -1,0 +1,150 @@
+
+label {
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
+  border:  1px solid;
+  position: relative;
+  width: 90px;
+  padding: 2px;  
+}
+    body {
+    font-family: georgia, sans-serif;
+    margin: 20px;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    
+    
+}
+
+#header {
+    background-color: #f06a23;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    margin-top: auto;
+    font-family: serif;
+    
+}
+
+.question {
+    margin-bottom: 20px;
+    gap: 10px;
+    border: 2px solid black; /* Green border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 30px; /* Spacing inside the border */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 15px; /* Space between questions */
+}
+footer {
+    background-color: #f06a23;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+#next, #prev, #submit-button  {
+    margin-bottom: 20px;
+    background-color: #f06a23; /* BLue background */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    padding: 12px 20px; /* Vertical and horizontal padding */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Increase font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;    
+}
+#result-section {
+    display: none;
+}
+
+/* Add hover effect */
+#submit-button:hover, #next:hover, #prev:hover {
+    background-color: #2e0f0f; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+
+
+.image {
+	width: 200px;
+	position: relative;
+}
+
+#result-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+	 
+}
+
+#result-table th, #result-table td {
+    border: 1px solid #4d2789;
+    padding: 10px;
+    text-align: center;
+}
+
+#result-table th {
+    background-color: #efe4ff;
+    font-weight: bold;
+}
+
+#result-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#result-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#result-table td {
+    font-size: 16px;
+    color: #333;
+}
+
+#result-table .correct {
+    color: green;
+    font-weight: bold;
+}
+
+#result-table .incorrect {
+    color: red;
+    font-weight: bold;
+}
+.question div {
+	margin-top: 20px;
+}
+.nav-button {
+    padding: 5px;
+    border-radius: 8px;
+    background-color: rgb(241, 228, 248);
+}
+#nav_quest {
+    font-size: 16px;
+    padding:3px;
+    margin-bottom: 1px;
+    
+    
+}
+ #question14 label, #question9 label {
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
+  border:  1px solid;
+  position: relative;
+  width: 160px;
+  padding: 2px;
+    
+}
+#image11 {
+    width:160px;
+    position:absolute;
+    margin-left: 30%;
+    margin-inline: 30%;;
+    margin-top: 20px;
+}

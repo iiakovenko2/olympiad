@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <style>
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Results</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Your Answer</th>
+                <th>Correct Answer</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question, user_answer, correct_answer in results %}
+                <tr>
+                    <td>{{ question }}</td>
+                    <td class="{{ 'correct' if user_answer == correct_answer else 'incorrect' }}">{{ user_answer }}</td>
+                    <td class="{{ 'correct' if user_answer == correct_answer else 'incorrect' }}">{{ correct_answer }}</td>
+                    <td>{{ 'Correct' if user_answer == correct_answer else 'Incorrect' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">Go Back to the Quiz</a>
+</body>
+</html>
