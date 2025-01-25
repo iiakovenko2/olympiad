@@ -11,6 +11,11 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+# Default route to redirect to signup
+@app.route('/')
+def main_route():
+    return redirect(url_for('signup'))
+
 # Route to serve the sign-up page
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -61,46 +66,29 @@ def quiz():
 @app.route('/submit_quiz', methods=['POST'])
 def submit_quiz():
     try:
-        # Log incoming request
         data = request.get_json()  # Use get_json() for clarity
-        print("Received data:", data)  # Log the received data
-
         student_id = data.get('student_id')
         score = data.get('score')
         answers = data.get('answers')
 
-        # Check if any required fields are missing
         if not student_id or score is None or answers is None:
-            print("Missing data:", {"student_id": student_id, "score": score, "answers": answers})
             return jsonify({"error": "Missing required fields"}), 400
 
-        # Log answers to ensure they're correctly formatted
-        print("Answers:", answers)
-
-        # Update quiz results in the database
         with sqlite3.connect('instance/olympiad.db') as conn:
             cursor = conn.cursor()
-            print("Attempting to update database...")  # Log before the database query
             cursor.execute('''
                 UPDATE quiz_results
                 SET score = ?, answers = ?
                 WHERE student_id = ?
-            ''', (score, str(answers), student_id))  # Convert answers to string if it's a dictionary
+            ''', (score, str(answers), student_id))
             conn.commit()
-            print("Database updated successfully!")  # Log after successful update
 
         return jsonify({"success": True})
 
     except sqlite3.Error as e:
-        print(f"Database error: {str(e)}")  # Log database error
         return jsonify({"error": f"Database error: {str(e)}"}), 500
     except Exception as e:
-        print(f"General error: {str(e)}")  # Log general error
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
-
-
-
-
 
 # Run the app
 if __name__ == '__main__':
