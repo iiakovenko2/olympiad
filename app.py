@@ -1,17 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import sqlite3
 
 # Initialize the Flask app
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Replace with a secure key
 
-# PostgreSQL connection string
-DATABASE_URL = "postgresql://olympiad_db_user:adxZZp7uKX6C1u35pTZLNmzMXWSJKFFh@dpg-cuatpki3esus73eosfbg-a/olympiad_db"
-
 # Database connection function
 def get_db_connection():
-    conn = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    conn = sqlite3.connect('instance/olympiad.db')
+    conn.row_factory = sqlite3.Row
     return conn
 
 # Default route to redirect to signup
@@ -36,13 +33,13 @@ def signup():
             return jsonify({'success': False, 'error': 'All fields are required!'}), 400
 
         # Insert the student info into the database
-        with get_db_connection() as conn:
-            with conn.cursor() as cursor:
-                cursor.execute('''
-                    INSERT INTO quiz_results (student_id, first_name, last_name, score, answers)
-                    VALUES (%s, %s, %s, %s, %s)
-                ''', (student_id, first_name, last_name, 0, ""))  # Initialize score and answers
-                conn.commit()
+        with sqlite3.connect('instance/olympiad.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO quiz_results (student_id, first_name, last_name, score, answers)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (student_id, first_name, last_name, 0, ""))  # Initialize score and answers
+            conn.commit()
 
         return jsonify({'success': True, 'redirect_url': url_for('quiz', student_id=student_id)})
 
@@ -50,18 +47,17 @@ def signup():
 @app.route('/quiz')
 def quiz():
     student_id = request.args.get('student_id')
-
+    
     # Fetch student info from the database
-    with get_db_connection() as conn:
-        with conn.cursor() as cursor:
-            cursor.execute('''
-                SELECT first_name, last_name FROM quiz_results WHERE student_id = %s
-            ''', (student_id,))
-            student = cursor.fetchone()
+    with sqlite3.connect('instance/olympiad.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT first_name, last_name FROM quiz_results WHERE student_id = ?
+        ''', (student_id,))
+        student = cursor.fetchone()
 
     if student:
-        first_name = student['first_name']
-        last_name = student['last_name']
+        first_name, last_name = student
         return render_template('testpage.html', student_id=student_id, first_name=first_name, last_name=last_name)
     else:
         return "Student not found!", 404
@@ -70,7 +66,7 @@ def quiz():
 @app.route('/submit_quiz', methods=['POST'])
 def submit_quiz():
     try:
-        data = request.get_json()
+        data = request.get_json()  # Use get_json() for clarity
         student_id = data.get('student_id')
         score = data.get('score')
         answers = data.get('answers')
@@ -78,21 +74,26 @@ def submit_quiz():
         if not student_id or score is None or answers is None:
             return jsonify({"error": "Missing required fields"}), 400
 
-        with get_db_connection() as conn:
-            with conn.cursor() as cursor:
-                cursor.execute('''
-                    UPDATE quiz_results
-                    SET score = %s, answers = %s
-                    WHERE student_id = %s
-                ''', (score, str(answers), student_id))
-                conn.commit()
+        with sqlite3.connect('instance/olympiad.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                UPDATE quiz_results
+                SET score = ?, answers = ?
+                WHERE student_id = ?
+            ''', (score, str(answers), student_id))
+            conn.commit()
 
         return jsonify({"success": True})
 
-    except psycopg2.Error as e:
+    except sqlite3.Error as e:
         return jsonify({"error": f"Database error: {str(e)}"}), 500
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+@app.route('/download_db')
+def download_db():
+    return send_file('instance/olympiad.db', as_attachment=True)
+
 
 # Run the app
 if __name__ == '__main__':
