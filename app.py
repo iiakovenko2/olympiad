@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Replace with a secure key
 
 # PostgreSQL connection string
-DATABASE_URL = "postgresql://olympiad_db_user:adxZZp7uKX6C1u35pTZLNmzMXWSJKFFh@dpg-cuatpki3esus73eosfbg-a/olympiad_db"
+DATABASE_URL = "postgresql://olympiad_db_user:adxZZp7uKX6C1u35pTZLNmzMXWSJKFFh@dpg-cuatpki3esus73eosfbg-a.frankfurt-postgres.render.com:5432/olympiad_db"
 
 # Database connection function
 def get_db_connection():
@@ -38,7 +38,7 @@ def signup():
         # Insert the student info into the database
         with get_db_connection() as conn:
             with conn.cursor() as cursor:
-                cursor.execute('''
+                cursor.execute(''' 
                     INSERT INTO quiz_results (student_id, first_name, last_name, score, answers)
                     VALUES (%s, %s, %s, %s, %s)
                 ''', (student_id, first_name, last_name, 0, ""))  # Initialize score and answers
@@ -50,7 +50,7 @@ def signup():
 @app.route('/quiz')
 def quiz():
     student_id = request.args.get('student_id')
-    
+
     # Fetch student info from the database
     with get_db_connection() as conn:
         with conn.cursor() as cursor:
