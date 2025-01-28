@@ -131,7 +131,7 @@ footer {
     
     
 }
- #question14 label, #question9 label {
+ #question14 label, #question8 label {
   display: inline-block;
   background-color: rgb(255, 255, 255);
   border-radius: 3px;
@@ -140,11 +140,4 @@ footer {
   width: 160px;
   padding: 2px;
     
-}
-#image11 {
-    width:160px;
-    position:absolute;
-    margin-left: 30%;
-    margin-inline: 30%;;
-    margin-top: 20px;
 }
